@@ -12,11 +12,14 @@ public:
 	void setFourMomentum(float p, int i); //single number set
 	//accessor
 	float operator [](int i) const;
+	//print full vector
 	void print() const;
 	//evaluate different things
 	float invariantMass();
 	float transverseMomentum();
 	//sum of four-vectors
 	FourVec operator + (FourVec const &obj);
+	//product by a scalar
+	FourVec operator * (float const &obj);
 };
 #endif

@@ -62,6 +62,14 @@ int testSumFourVectors(FourVec p, FourVec q)
 	return 0;
 }
 
+//unit test for evaluating multiplication by scalar
+int testScalarMul(FourVec p, float r)
+{
+	FourVec q = p*r;
+	q.print();
+	return 0;
+}
+
 //testing
 int main(){
 	float component, m, t;
@@ -71,5 +79,6 @@ int main(){
 // 	m = testInvariantMass(p);
 // 	t = testTransverseMomentum(p);
 	testSumFourVectors(p,p);
+	testScalarMul(p,4);
 	return 0;
 }

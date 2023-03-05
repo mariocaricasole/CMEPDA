@@ -42,7 +42,9 @@ void FourVec::print() const
 	std::cout << "[";
 	for(int i=0;i<4;i++)
 	{
-		std::cout << components_[i] << ", ";
+		std::cout << components_[i];
+		if(i<3)
+			std::cout<< ", ";
 	}
 	std::cout << "]" << std::endl;
 }
@@ -86,6 +88,19 @@ FourVec FourVec::operator + (FourVec const &obj)
 	{
 		temp = components_[i] + obj[i];
 		res.setFourMomentum(temp, i);
+	}
+	return res;
+}
+
+//define multiplication by scalar
+FourVec FourVec::operator * (float const &obj)
+{
+	FourVec res;
+	float temp;
+	for(int i=0; i<4; i++)
+	{
+		temp = components_[i]*obj;
+		res.setFourMomentum(temp,i);
 	}
 	return res;
 }
