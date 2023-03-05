@@ -58,10 +58,7 @@ int testTransverseMomentum(FourVec p)
 int testSumFourVectors(FourVec p, FourVec q)
 {
 	FourVec r = p + q;
-	for(int i=0;i<4;i++)
-	{
-		std::cout << r[i] << " ";
-	}
+	r.print();
 	return 0;
 }
 

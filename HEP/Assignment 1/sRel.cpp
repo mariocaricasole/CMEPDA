@@ -36,6 +36,17 @@ float FourVec::operator [](int i) const
 	return components_[i];
 }
 
+//define print
+void FourVec::print() const
+{
+	std::cout << "[";
+	for(int i=0;i<4;i++)
+	{
+		std::cout << components_[i] << ", ";
+	}
+	std::cout << "]" << std::endl;
+}
+
 //define invariantMass
 float FourVec::invariantMass()
 {

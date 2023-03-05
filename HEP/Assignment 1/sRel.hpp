@@ -12,6 +12,7 @@ public:
 	void setFourMomentum(float p, int i); //single number set
 	//accessor
 	float operator [](int i) const;
+	void print() const;
 	//evaluate different things
 	float invariantMass();
 	float transverseMomentum();
