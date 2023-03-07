@@ -1,5 +1,6 @@
 #ifndef SREL_HPP
 #define SREL_HPP
+#include <string>
 class FourVec
 {
 private:
@@ -22,4 +23,23 @@ public:
 	//product by a scalar
 	FourVec operator * (float const &obj);
 };
+
+
+class Particle : public FourVec
+{
+private:
+	std::string id_;
+	float mass_;
+	float charge_;
+	float decayTime_;
+public:
+	//constructor
+	Particle(std::string id, float px, float py, float pz, float E, float charge, float decaytime = -1);
+	//accessor
+	std::string id();
+	float mass();
+	float charge();
+	float decayTime();
+};
+
 #endif

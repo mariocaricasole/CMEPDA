@@ -70,15 +70,30 @@ int testScalarMul(FourVec p, float r)
 	return 0;
 }
 
+//unit test for derived Particle class
+int testParticleClass(Particle e)
+{
+	e.print();
+	std::cout << e[0] << std::endl;
+	std::cout << e.mass() << std::endl;
+	std::cout << e.charge() << std::endl;
+	std::cout << e.decayTime() << std::endl;
+	std::cout << e.id() << std::endl;
+	std::cout << e.transverseMomentum() << std::endl;
+	return 0;
+}
+
 //testing
 int main(){
 	float component, m, t;
 	FourVec p(1.1,2.3,4.2,10.2);
 	FourVec q;
+	Particle e("electron",1.5,2.2,3.4,4.35,-1.0);
 // 	component = testComponentAccess(p);
 // 	m = testInvariantMass(p);
 // 	t = testTransverseMomentum(p);
-	testSumFourVectors(p,p);
-	testScalarMul(p,4);
+//	testSumFourVectors(p,p);
+//	testScalarMul(p,4);
+	testParticleClass(e);
 	return 0;
 }

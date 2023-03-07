@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <typeinfo>
+#include <string>
 #include "sRel.hpp"
 
 //defining the constructor of the class
@@ -62,7 +63,6 @@ float FourVec::invariantMass()
 		throw std::invalid_argument("The square of the invariant mass is negative. Unless we discovered imaginary masses, the data inserted is wrong.");
 	
 	res = sqrt(res);
-	std::cout<< "The invariant mass is: " << res << std::endl;
 	return res;
 }
 
@@ -75,7 +75,6 @@ float FourVec::transverseMomentum()
 		res += pow(components_[i],2);
 	}
 	res = sqrt(res);
-	std::cout<< "The transverse momentum is: " << res << std::endl;
 	return res;
 }
 
@@ -103,4 +102,38 @@ FourVec FourVec::operator * (float const &obj)
 		res.setFourMomentum(temp,i);
 	}
 	return res;
+}
+
+///// PARTICLE CLASS /////
+
+//defining constructor
+Particle::Particle(std::string id, float px, float py, float pz, float E, float charge, float decayTime) : FourVec(px,py,pz,E)
+{
+	id_ = id;
+	mass_ = invariantMass();
+	charge_ = charge;
+	decayTime_ = decayTime;
+}
+
+std::string Particle::id()
+{
+	return id_;
+}
+
+//accessor for mass attribute
+float Particle::mass()
+{
+	return mass_;
+}
+
+//accessor for charge attribute
+float Particle::charge()
+{
+	return charge_;
+}
+
+//accessor template for decay decayTime
+float Particle::decayTime()
+{
+	return decayTime_;
 }
