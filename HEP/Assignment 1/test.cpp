@@ -3,6 +3,7 @@
 #include <typeinfo>
 #include "particle.hpp"
 #include "fourvector.hpp"
+#include "twobodies.hpp"
 
 //unit test for accessing components of the four vector
 int testComponentAccess(FourVec p)
@@ -84,19 +85,30 @@ int testParticleClass(Particle e)
 	return 0;
 }
 
+//unit test for derived TwoBodies class
+int testTwoBodiesClass(TwoBodies f)
+{
+	int i = testParticleClass(f);
+	f.printAll();
+	return i;
+}
+
 //testing
 int main(){
 	float component, m, t;
 	FourVec p(1.1,2.3,4.2,10.2);
 // 	p[0] = 1.2;
-	p.print();
-	FourVec q;
-	Particle e("electron",1.5,2.2,3.4,10.5,-1.0);
+// 	p.print();
+// 	FourVec q;
+	Particle e("electron",p,-1.0);
+	Particle f("positron", -p, +1.0);
+	TwoBodies photon(e,f,"photon", -1);
 // 	component = testComponentAccess(p);
 // 	m = testInvariantMass(p);
 // 	t = testTransverseMomentum(p);
 //	testSumFourVectors(p,p);
 //	testScalarMul(p,4);
 // 	testParticleClass(e);
+	testTwoBodiesClass(photon);
 	return 0;
 }
