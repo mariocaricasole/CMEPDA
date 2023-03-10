@@ -1,8 +1,7 @@
 #include "particle.hpp"
-#include "fourvector.hpp"
 
 //defining constructor
-Particle::Particle(std::string id, float px, float py, float pz, float E, float charge, float tau) : FourVec(px,py,pz,E)
+Particle::Particle(std::string id, const FourVec& p, float charge, float tau) : FourVec(p)
 {
 	id_ = id;
 	charge_ = charge;
@@ -10,6 +9,6 @@ Particle::Particle(std::string id, float px, float py, float pz, float E, float 
 }
 
 //accessors
-std::string Particle::id() {return id_;}
-float Particle::charge(){return charge_;}
-float Particle::tau(){return tau_;}
+std::string Particle::id() const {return id_;}
+float Particle::charge() const {return charge_;}
+float Particle::tau() const {return tau_;}
