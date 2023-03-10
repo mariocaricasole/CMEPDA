@@ -2,24 +2,19 @@
 #include <cmath>
 #include <typeinfo>
 #include <string>
-#include "sRel.hpp"
+#include "fourvector.hpp"
 
 //defining the constructor of the class
 FourVec::FourVec(float px, float py, float pz, float E)
 {
-	float p[4] = {E,px,py,pz};
-	setFourMomentum(p);
-}
-
-//define setter
-void FourVec::setFourMomentum(float p[4])
-{
+	float p[4] = {px,py,pz,E};
 	for(int i=0;i<4;i++)
 	{
 		components_[i] = p[i];
 	}
 }
 
+//define setter
 void FourVec::setFourMomentum(float p, int i)
 {
 	if(i<0 or i>3)
@@ -51,10 +46,10 @@ void FourVec::print() const
 }
 
 //define invariantMass
-float FourVec::invariantMass()
+float FourVec::m()
 {
-	float res = pow(components_[0],2);
-	for(int i=1; i<4; i++)
+	float res = pow(components_[3],2);
+	for(int i=2; i>=0; i--)
 	{
 		res -= pow(components_[i],2);
 	}
@@ -67,10 +62,10 @@ float FourVec::invariantMass()
 }
 
 //define transverseMomentum
-float FourVec::transverseMomentum()
+float FourVec::pT()
 {
 	float res=0;
-	for(int i=1;i<3;i++)
+	for(int i=0;i<2;i++)
 	{
 		res += pow(components_[i],2);
 	}
@@ -102,38 +97,4 @@ FourVec FourVec::operator * (float const &obj)
 		res.setFourMomentum(temp,i);
 	}
 	return res;
-}
-
-///// PARTICLE CLASS /////
-
-//defining constructor
-Particle::Particle(std::string id, float px, float py, float pz, float E, float charge, float decayTime) : FourVec(px,py,pz,E)
-{
-	id_ = id;
-	mass_ = invariantMass();
-	charge_ = charge;
-	decayTime_ = decayTime;
-}
-
-std::string Particle::id()
-{
-	return id_;
-}
-
-//accessor for mass attribute
-float Particle::mass()
-{
-	return mass_;
-}
-
-//accessor for charge attribute
-float Particle::charge()
-{
-	return charge_;
-}
-
-//accessor template for decay decayTime
-float Particle::decayTime()
-{
-	return decayTime_;
 }

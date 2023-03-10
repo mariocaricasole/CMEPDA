@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <typeinfo>
-#include "sRel.hpp"
+#include "particle.hpp"
+#include "fourvector.hpp"
 
 //unit test for accessing components of the four vector
 int testComponentAccess(FourVec p)
@@ -28,7 +29,7 @@ int testInvariantMass(FourVec p)
 	float m;
 	try
 	{
-		m = p.invariantMass();
+		m = p.m();
 	}
 	catch(std::invalid_argument& e)
 	{
@@ -44,7 +45,7 @@ int testTransverseMomentum(FourVec p)
 	float t;
 	try
 	{
-		t = p.transverseMomentum();
+		t = p.pT();
 	}
 	catch(std::invalid_argument& e)
 	{
@@ -75,11 +76,11 @@ int testParticleClass(Particle e)
 {
 	e.print();
 	std::cout << e[0] << std::endl;
-	std::cout << e.mass() << std::endl;
+	std::cout << e.m() << std::endl;
 	std::cout << e.charge() << std::endl;
-	std::cout << e.decayTime() << std::endl;
+	std::cout << e.tau() << std::endl;
 	std::cout << e.id() << std::endl;
-	std::cout << e.transverseMomentum() << std::endl;
+	std::cout << e.pT() << std::endl;
 	return 0;
 }
 
@@ -87,13 +88,15 @@ int testParticleClass(Particle e)
 int main(){
 	float component, m, t;
 	FourVec p(1.1,2.3,4.2,10.2);
+// 	p[0] = 1.2;
+	p.print();
 	FourVec q;
-	Particle e("electron",1.5,2.2,3.4,4.35,-1.0);
+	Particle e("electron",1.5,2.2,3.4,10.5,-1.0);
 // 	component = testComponentAccess(p);
 // 	m = testInvariantMass(p);
 // 	t = testTransverseMomentum(p);
 //	testSumFourVectors(p,p);
 //	testScalarMul(p,4);
-	testParticleClass(e);
+// 	testParticleClass(e);
 	return 0;
 }
