@@ -1,7 +1,3 @@
-#include <iostream>
-#include <cmath>
-#include <typeinfo>
-#include <string>
 #include "fourvector.hpp"
 
 //defining the constructor of the class
@@ -46,7 +42,7 @@ void FourVec::print() const
 }
 
 //define invariantMass
-float FourVec::m()
+float FourVec::m() const
 {
 	float res = pow(components_[3],2);
 	for(int i=2; i>=0; i--)
@@ -62,7 +58,7 @@ float FourVec::m()
 }
 
 //define transverseMomentum
-float FourVec::pT()
+float FourVec::pT() const
 {
 	float res=0;
 	for(int i=0;i<2;i++)
@@ -74,7 +70,7 @@ float FourVec::pT()
 }
 
 // define sum between four vectors
-FourVec FourVec::operator + (FourVec const &obj)
+FourVec FourVec::operator + (FourVec const &obj) const
 {
 	FourVec res;
 	float temp;
@@ -87,7 +83,7 @@ FourVec FourVec::operator + (FourVec const &obj)
 }
 
 //define multiplication by scalar
-FourVec FourVec::operator * (float const &obj)
+FourVec FourVec::operator * (float const &obj) const
 {
 	FourVec res;
 	float temp;
@@ -95,6 +91,18 @@ FourVec FourVec::operator * (float const &obj)
 	{
 		temp = components_[i]*obj;
 		res.setFourMomentum(temp,i);
+	}
+	return res;
+}
+
+//define opposite operator
+FourVec FourVec::operator - () const
+{
+	FourVec res;
+	res.setFourMomentum(components_[3], 3);
+		for(int i=0; i<3; i++)
+	{
+		res.setFourMomentum(-components_[i],i);
 	}
 	return res;
 }

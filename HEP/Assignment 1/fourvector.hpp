@@ -1,6 +1,9 @@
 #ifndef FOURVECTOR_HPP
 #define FOURVECTOR_HPP
 #include <string>
+#include <iostream>
+#include <cmath>
+#include <typeinfo>
 class FourVec
 {
 private:
@@ -15,12 +18,15 @@ public:
 	//print full vector
 	void print() const;
 	//evaluate different things
-	float m();
-	float pT();
+	float m() const;
+	float pT() const;
 	//sum of four-vectors
-	FourVec operator + (FourVec const &obj);
+	FourVec operator + (FourVec const &obj) const;
 	//product by a scalar
-	FourVec operator * (float const &obj);
+	FourVec operator * (float const &obj) const;
+	// opposite operator
+	FourVec operator - () const;
+	
 };
 
 #endif
