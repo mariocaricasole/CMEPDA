@@ -79,11 +79,28 @@ public:
 		return res;
 	}
 	//sum of four-vectors
-	FourVec operator + (FourVec const &obj) const;
-	//product by scalar
-	FourVec operator * (T const &obj) const;
+	template<class T2>
+	FourVec<T> operator + (FourVec<T2> const &obj) const
+	{
+		FourVec<T> res;
+		for(int i=0;i<4;i++)
+		{
+			res.setFourMomentum(components_[i] + T(obj[i]),i);
+		}
+		return res;
+	}
+
 	//parity operator
-	FourVec operator - () const;
+	FourVec operator - () const
+	{
+		FourVec<T> res;
+		for(int i=0;i<3;i++)
+		{
+			res.setFourMomentum(-components_[i],i);
+		}
+		res.setFourMomentum(components_[3],3);
+		return res;
+	}
 };
 
 #endif
