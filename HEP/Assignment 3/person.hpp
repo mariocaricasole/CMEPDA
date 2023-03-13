@@ -11,6 +11,7 @@ private:
 public:
 	//constructor
 	Person(std::string name, std::string number, std::string email) : m_name(name), m_number(number), m_email(email) {};
+	Person(){};
 	//getters
 	std::string name() const {return m_name;};
 	std::string number() const {return m_number;};
