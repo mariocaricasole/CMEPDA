@@ -4,6 +4,7 @@
 #include "person.hpp"
 #include<vector>
 #include<utility>
+#include<algorithm>
 class PhoneBook
 {
 private:
@@ -21,26 +22,44 @@ public:
 		for(std::vector<Person>::iterator it = m_entries.begin(); it != m_entries.end();it++)
 		{
 			it->print();
-		};
+		}
 	};
+	
 	//search entry
 	std::pair<bool,Person> search(std::string name)
 	{
+		bool found = false;
 		std::pair<bool,Person> res;
 		for(std::vector<Person>::iterator it = m_entries.begin(); it != m_entries.end(); it++)
 		{
 			if(it->name() == name)
 			{
 				std::cout << "Contact found!\n";
-				res = std::make_pair(true, *it);
-			}
-			else
-			{
-				std::cout << name << " not found!\n";
-				res = std::make_pair(false,Person());
+				found = true;
+				res = std::make_pair(found, *it);
+				break;
 			}
 		}
+		
+		if(!found)
+		{
+			std::cout << name << " not found!\n";
+			res = std::make_pair(found,Person());
+		}
+		
 		return res;
+	}
+	
+	//define comparison class
+	class CompareNames{
+	public:
+		bool operator()(const Person& a, const Person& b){return a.name() < b.name();};
+	};
+	
+	//define sort algorithm
+	void sort()
+	{
+		std::sort(m_entries.begin(), m_entries.end(),CompareNames());
 	}
 };	
 
