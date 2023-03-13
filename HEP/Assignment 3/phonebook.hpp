@@ -5,6 +5,8 @@
 #include<vector>
 #include<utility>
 #include<algorithm>
+#include<map>
+#include<string>
 class PhoneBook
 {
 private:
@@ -15,6 +17,8 @@ public:
 	//add entry
 	void addEntry(std::string name, std::string number, std::string email){m_entries.push_back(Person(name,number,email));};
 	void addEntry(Person person){m_entries.push_back(person);};
+	//accessor to entry
+	Person operator[](int i) {return m_entries[i];}
 	//print whole phonebook
 	void print()
 	{
@@ -56,10 +60,27 @@ public:
 		bool operator()(const Person& a, const Person& b){return a.name() < b.name();};
 	};
 	
-	//define sort algorithm
+	//sort algorithm
 	void sort()
 	{
 		std::sort(m_entries.begin(), m_entries.end(),CompareNames());
+	}
+	
+	//transform routine
+	static Person addItalianPrefix(const Person& e)
+	{
+		Person en = e;
+		if(en.number().length() == 0) return en;
+		if(en.number().find("+") == std::string::npos)
+		{
+			en.setNumber("+39" + en.number());
+		}
+		return en;
+	}
+	
+	void addAllItalianPrefix()
+	{
+		std::transform(m_entries.begin(), m_entries.end(), m_entries.begin(), addItalianPrefix);
 	}
 };	
 
