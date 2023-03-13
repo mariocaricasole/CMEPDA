@@ -21,7 +21,7 @@ int testPhoneBook(PhoneBook book, Person person)
 	std::cout << "Adding Mario...\n";
 	book.addEntry(person);
 	std::cout<< "Adding Luigi...\n";
-	book.addEntry("Luigi Caricasole","3453567890","luigicarica@gmail.com");
+	book.addEntry("Luigi Caricasole","+393453567890","luigicarica@gmail.com");
 	std::cout << "\nPrinting whole book\n";
 	book.print();
 	std::cout << "\nSearching for Mario \n";
@@ -33,6 +33,10 @@ int testPhoneBook(PhoneBook book, Person person)
 	
 	std::cout << "\nSorting book \n";
 	book.sort();
+	book.print();
+	
+	std::cout << "\nAdding +39 prefix \n";
+	book.addAllItalianPrefix();
 	book.print();
 	std::cout << "Test successful" << std::endl;
 	return 0;
