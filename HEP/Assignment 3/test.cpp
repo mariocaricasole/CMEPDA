@@ -1,4 +1,4 @@
-#include "person.hpp"
+#include "phonebook.hpp"
 
 int testPerson(Person person)
 {
@@ -15,10 +15,20 @@ int testPerson(Person person)
 	return 0;
 }
 
+int testPhoneBook(PhoneBook book, Person person)
+{
+	book.addEntry(person);
+	book.print();
+	return 0;
+}
+
 
 int main()
 {
 	Person mario("Mario", "3665803754","mariocarica@gmail.com");
 	int res = testPerson(mario);
+	//test phonebook
+	PhoneBook book;
+	res += testPhoneBook(book,mario);
 	return res;
 }
