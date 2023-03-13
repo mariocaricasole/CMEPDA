@@ -18,12 +18,22 @@ int testPerson(Person person)
 int testPhoneBook(PhoneBook book, Person person)
 {
 	std::cout<< "Testing phonebook...\n";
+	std::cout << "Adding Mario...\n";
 	book.addEntry(person);
+	std::cout<< "Adding Luigi...\n";
+	book.addEntry("Luigi Caricasole","3453567890","luigicarica@gmail.com");
+	std::cout << "\nPrinting whole book\n";
 	book.print();
+	std::cout << "\nSearching for Mario \n";
 	Person res = book.search(person.name()).second;
 	res.print();
-	res = book.search("Luigi Caricasole").second;
+	std::cout << "\nSearching for Carlo \n";
+	res = book.search("Carlo Caricasole").second;
 	res.print();
+	
+	std::cout << "\nSorting book \n";
+	book.sort();
+	book.print();
 	std::cout << "Test successful" << std::endl;
 	return 0;
 }
